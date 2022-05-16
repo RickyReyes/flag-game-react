@@ -59,7 +59,7 @@ export default function Choices({roundsLeft, setRoundsLeft, options, correctInde
                 <img className="mb-4 h-48 w-auto shadow-xl" src={correctFlag} />
                 {optionElements}
                 <div>correct: {numberCorrect}/{gameLength-roundsLeft}</div>
-                <div>rounds left: {roundsLeft}</div>
+                <div>remaining flags: {roundsLeft}</div>
             </div>
         </div>
     )
