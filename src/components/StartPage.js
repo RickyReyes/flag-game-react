@@ -2,7 +2,7 @@ import React from 'react'
 
 export default function StartPage({handleStart}) {
   return (
-    <div className="flex flex-col items-center mt-4">
+    <main className="flex flex-col items-center mt-4">
         <img 
           className=" sw-full h-40 w-40" src="https://bestanimations.com/media/earth/726892854earth-spinning-rotating-animation-14.gif" 
           alt="animation of earth spinning" />
@@ -12,6 +12,6 @@ export default function StartPage({handleStart}) {
           type="button">
           Start
         </button>
-    </div>
+    </main>
   )
 }
