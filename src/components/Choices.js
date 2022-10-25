@@ -11,14 +11,17 @@ export default function Choices({roundsLeft, setRoundsLeft, options, correctInde
             <button 
                 key={country.area} 
                 onClick={(e) => handleSelect(e)}
-                className="self-start text-lg font-bold py-1 px-2 mb-2 border border-indigo-500 rounded-full text-indigo-900 bg-indigo-100 hover:bg-indigo-200">
+                className="self-start text-lg font-bold py-1 px-2 mb-2 border border-indigo-500 rounded-full text-indigo-900 bg-indigo-100 hover:bg-indigo-200 focus:bg-indigo-100 active:bg-indigo-100">
                     {country.name.common}
             </button>
         )))
     }, [roundsLeft]);
 
     function handleSelect(e) {
-        if (e.target.innerText == correctCountry.name.common) {
+        setTimeout(() => {
+            setRoundsLeft(prev => prev - 1)
+        }, 1000)
+        if (e.target.innerText === correctCountry.name.common) {
             setNumberCorrect(prev => prev + 1)
         }
         let selectedOptionElements = options.map(country => (
@@ -30,9 +33,6 @@ export default function Choices({roundsLeft, setRoundsLeft, options, correctInde
             </button>
         ))
         setOptionElements(selectedOptionElements)
-        setTimeout(() => {
-            setRoundsLeft(prev => prev - 1)
-        }, 1000)
     }
 
     useEffect(() => {
@@ -55,7 +55,7 @@ export default function Choices({roundsLeft, setRoundsLeft, options, correctInde
         <div className="h-full w-full flex flex-col items-center pt-4 px-2">
             <div className="flex flex-col text-indigo-900 text-lg">
                 <div className="flex flex-col lg:flex-row lg:gap-8">
-                    <img className="mb-4 h-48 w-auto shadow-xl" src={correctFlag} />
+                    <img className="mb-4 h-48 w-auto shadow-xl" src={correctFlag} alt="country's flag" />
                     <div className="flex flex-col">
                         {optionElements}
                     </div>
