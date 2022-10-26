@@ -28,7 +28,7 @@ export default function Choices({roundsLeft, setRoundsLeft, options, correctInde
             <button disabled
                 key={country.area} 
                 onClick={(e) => handleSelect(e)}
-                className={"self-start text-lg font-bold py-1 px-2 mb-2 border border-indigo-500 rounded-full text-indigo-900 " + (country.name.common == correctCountry.name.common ? "bg-green-300" : e.target.innerText == country.name.common ? "bg-red-300" : "bg-indigo-100")}>
+                className={"self-start text-lg font-bold py-1 px-2 mb-2 border border-indigo-500 rounded-full text-indigo-900" + (country.name.common === correctCountry.name.common ? "bg-green-300" : e.target.innerText === country.name.common ? "bg-red-300" : "bg-indigo-100 active:bg-indigo-100 focus:bg-indigo-100")}>
                     {country.name.common}
             </button>
         ))
