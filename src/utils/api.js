@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 
 export function useCountries() {
-  const [data, setData] = useState(null);
+  const [countries, setCountries] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   useEffect(() => {
@@ -12,7 +12,7 @@ export function useCountries() {
           throw new Error("Data fetch failed.");
         }
         const data = await res.json();
-        setData(data);
+        setCountries(data);
       } catch (err) {
         setError(err);
       } finally {
@@ -21,5 +21,5 @@ export function useCountries() {
     };
     fetchCountries();
   }, []);
-  return { data, loading, error };
+  return { countries, loading, error };
 }

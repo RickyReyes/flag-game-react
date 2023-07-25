@@ -10,7 +10,6 @@
   flex-direction: column;
   align-items: center;
 }
-
 .start-page {
   display: flex;
   flex-direction: column;
@@ -25,7 +24,8 @@
 
 .flag {
   width: 100%;
-  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1),
+    0 4px 6px -2px rgba(0, 0, 0, 0.05);
 }
 
 .country-name {
@@ -35,7 +35,6 @@
 .num-of-rounds__label {
   display: block;
 }
-
 .num-of-rounds__buttons {
   margin-top: 0.25rem;
   display: block;
@@ -47,6 +46,7 @@
 }
 
 /* Main Screen */
+
 .flag,
 .options-box {
   align-self: stretch;
@@ -54,4 +54,4 @@
 
 .options-list {
   width: 100%;
-}/*# sourceMappingURL=index.css.map */
+}
