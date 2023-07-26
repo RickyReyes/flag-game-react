@@ -33,11 +33,19 @@
 }
 
 .num-of-rounds__label {
-  display: block;
+  margin-top: 0.5rem;
 }
+
 .num-of-rounds__buttons {
   margin-top: 0.25rem;
-  display: block;
+}
+
+.select-language__label {
+  margin-top: 1rem;
+}
+
+.select-language__buttons {
+  margin-top: 0.25rem;
 }
 
 .start-btn {

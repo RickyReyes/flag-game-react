@@ -1,14 +1,33 @@
-import { ToggleButtonGroup, Button, ToggleButton } from "@mui/material";
+import {
+  ToggleButtonGroup,
+  Button,
+  ToggleButton,
+  FormControl,
+  InputLabel,
+  Select,
+  MenuItem,
+} from "@mui/material";
 import { useContext } from "react";
 import { GameContext } from "../context/gameContext";
 
 export default function StartPage() {
-  const { numOfRounds, setNumOfRounds, handleStartGame } =
-    useContext(GameContext);
+  const {
+    numOfRounds,
+    setNumOfRounds,
+    handleStartGame,
+    language,
+    setLanguage,
+  } = useContext(GameContext);
 
-  const handleChange = (e, newNumOfRounds) => {
+  const handleNumOfRoundsChange = (e, newNumOfRounds) => {
     setNumOfRounds(newNumOfRounds);
   };
+
+  const handleLanguageChange = (e) => {
+    setLanguage(e.target.value);
+  };
+
+  console.log(language);
 
   return (
     <section className="start-page">
@@ -21,7 +40,7 @@ export default function StartPage() {
         color="primary"
         value={numOfRounds}
         exclusive
-        onChange={handleChange}
+        onChange={handleNumOfRoundsChange}
         aria-label="Platform"
         id="numOfRounds"
       >
@@ -29,6 +48,21 @@ export default function StartPage() {
         <ToggleButton value={10}>10</ToggleButton>
         <ToggleButton value={15}>15</ToggleButton>
       </ToggleButtonGroup>
+      <label className="select-language__label" htmlFor="numOfRounds">
+        Select Language
+      </label>
+      <FormControl sx={{ m: 1, minWidth: 120 }}>
+        <Select
+          value={language}
+          onChange={handleLanguageChange}
+          displayEmpty
+          inputProps={{ "aria-label": "Without label" }}
+        >
+          <MenuItem value="english">English</MenuItem>
+          <MenuItem value="spanish">Español</MenuItem>
+          <MenuItem value="french">Français</MenuItem>
+        </Select>
+      </FormControl>
       <Button
         className="start-btn"
         onClick={() => handleStartGame()}

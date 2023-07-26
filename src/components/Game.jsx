@@ -11,20 +11,23 @@ export default function Game() {
     setOptions,
     countries,
     NUM_OF_OPTIONS,
+    numOfRounds,
+    round,
+    setRound,
+    numberCorrect,
+    setNumberCorrect,
   } = useContext(GameContext);
   const [answerChosen, setAnswerChosen] = useState(false);
   const [answerCorrect, setAnswerCorrect] = useState(false);
-
   const [selectedIndex, setSelectedIndex] = useState(null);
 
   const handleListItemClick = (event, index) => {
     setSelectedIndex(index);
     setAnswerChosen(true);
-
     const selectionName = options[index].name.common;
     const correctName = options[correctIndex].name.common;
     if (selectionName === correctName) {
-      console.log("CORRECT!");
+      setNumberCorrect((p) => p + 1);
     }
   };
 
@@ -33,6 +36,7 @@ export default function Game() {
       const timeoutFunc = () => {
         setOptions(getOptions(countries, NUM_OF_OPTIONS));
         setAnswerChosen(false);
+        setRound((p) => p + 1);
       };
       const timeoutId = setTimeout(timeoutFunc, 2000);
       return () => clearTimeout(timeoutId);
@@ -66,6 +70,12 @@ export default function Game() {
           ))}
         </List>
       </Box>
+      <div>
+        Round: {round}/{numOfRounds}
+      </div>
+      <div>
+        Score: {numberCorrect}/{round - 1}
+      </div>
     </>
   );
 }
