@@ -4,14 +4,15 @@ import { getOptions } from "../utils/utils";
 const GameContext = createContext();
 
 function GameContextProvider(props) {
-  const GAME_LENGTH = 5; // number of rounds
+  const [numOfRounds, setNumOfRounds] = useState(5);
+  const [language, setLanguage] = useState("english");
   const NUM_OF_OPTIONS = 5; // per round
   const { countries, loading, error } = useCountries();
   const [gameStarted, setGameStarted] = useState(false);
   const [options, setOptions] = useState([]); // per round
   const [correctIndex, setCorrectIndex] = useState(null);
-  const [numOfRounds, setNumOfRounds] = useState(5);
-  const [roundsLeft, setRoundsLeft] = useState(numOfRounds);
+  const [round, setRound] = useState(1);
+  const [numberCorrect, setNumberCorrect] = useState(0);
 
   function handleStartGame() {
     if (countries) {
@@ -38,6 +39,12 @@ function GameContextProvider(props) {
         handleStartGame,
         correctIndex,
         setCorrectIndex,
+        round,
+        setRound,
+        numberCorrect,
+        setNumberCorrect,
+        language,
+        setLanguage,
       }}
     >
       {props.children}
