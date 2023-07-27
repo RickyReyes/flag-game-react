@@ -11,7 +11,7 @@ function GameContextProvider(props) {
   const [gameStarted, setGameStarted] = useState(false);
   const [options, setOptions] = useState([]); // per round
   const [correctIndex, setCorrectIndex] = useState(null);
-  const [round, setRound] = useState(1);
+  const [currentRound, setCurrentRound] = useState(1);
   const [numberCorrect, setNumberCorrect] = useState(0);
 
   function handleStartGame() {
@@ -39,8 +39,8 @@ function GameContextProvider(props) {
         handleStartGame,
         correctIndex,
         setCorrectIndex,
-        round,
-        setRound,
+        currentRound,
+        setCurrentRound,
         numberCorrect,
         setNumberCorrect,
         language,

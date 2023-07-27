@@ -3,7 +3,6 @@ import {
   Button,
   ToggleButton,
   FormControl,
-  InputLabel,
   Select,
   MenuItem,
 } from "@mui/material";
@@ -27,13 +26,21 @@ export default function StartPage() {
     setLanguage(e.target.value);
   };
 
-  console.log(language);
-
   return (
     <section className="start-page">
-      <h1 className="heading">Flag Game</h1>
+      <h1 className="heading">
+        {language === "french"
+          ? "Jeu de Drapeaux"
+          : language === "spanish"
+          ? "Juego de Banderas"
+          : "Flag Game"}
+      </h1>
       <label className="num-of-rounds__label" htmlFor="numOfRounds">
-        Number of Rounds
+        {language === "french"
+          ? "Nombre de tours"
+          : language === "spanish"
+          ? "Número de rondas"
+          : "Number of rounds"}
       </label>
       <ToggleButtonGroup
         className="num-of-rounds__buttons"
@@ -49,9 +56,13 @@ export default function StartPage() {
         <ToggleButton value={15}>15</ToggleButton>
       </ToggleButtonGroup>
       <label className="select-language__label" htmlFor="numOfRounds">
-        Select Language
+        {language === "french"
+          ? "Choisir la langue"
+          : language === "spanish"
+          ? "Seleccione el idioma"
+          : "Select language"}
       </label>
-      <FormControl sx={{ m: 1, minWidth: 120 }}>
+      <FormControl sx={{ m: 1, minWidth: 110 }}>
         <Select
           value={language}
           onChange={handleLanguageChange}
@@ -69,7 +80,11 @@ export default function StartPage() {
         style={{ marginTop: "1rem" }}
         variant="contained"
       >
-        Start
+        {language === "french"
+          ? "Commencer"
+          : language === "spanish"
+          ? "Comenzar"
+          : "Start"}
       </Button>
     </section>
   );

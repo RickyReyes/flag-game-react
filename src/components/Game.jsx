@@ -1,21 +1,21 @@
 import { useState, useEffect, useContext } from "react";
 import { GameContext } from "../context/gameContext";
-import { Box, List, ListItemText, ListItemButton } from "@mui/material";
+import { Alert, Box, List, ListItemText, ListItemButton } from "@mui/material";
 import { getOptions } from "../utils/utils";
 
 export default function Game() {
   const {
     options,
     correctIndex,
-    setCorrectIndex,
     setOptions,
     countries,
     NUM_OF_OPTIONS,
     numOfRounds,
-    round,
-    setRound,
+    currentRound,
+    setCurrentRound,
     numberCorrect,
     setNumberCorrect,
+    language,
   } = useContext(GameContext);
   const [answerChosen, setAnswerChosen] = useState(false);
   const [answerCorrect, setAnswerCorrect] = useState(false);
@@ -24,6 +24,7 @@ export default function Game() {
   const handleListItemClick = (event, index) => {
     setSelectedIndex(index);
     setAnswerChosen(true);
+
     const selectionName = options[index].name.common;
     const correctName = options[correctIndex].name.common;
     if (selectionName === correctName) {
@@ -36,12 +37,13 @@ export default function Game() {
       const timeoutFunc = () => {
         setOptions(getOptions(countries, NUM_OF_OPTIONS));
         setAnswerChosen(false);
-        setRound((p) => p + 1);
+        setCurrentRound((p) => p + 1);
       };
       const timeoutId = setTimeout(timeoutFunc, 2000);
       return () => clearTimeout(timeoutId);
     }
   }, [answerChosen]);
+
   return (
     <>
       <img
@@ -55,26 +57,60 @@ export default function Game() {
           component="nav"
           aria-label="secondary mailbox folder"
         >
-          {options.map((option, index) => (
-            <ListItemButton
-              key={option.name.common}
-              className="options-list__btn"
-              selected={selectedIndex === 2}
-              onClick={(event) => handleListItemClick(event, index)}
-            >
-              <ListItemText
-                className="options-list__text"
-                primary={option.name.common}
-              />
-            </ListItemButton>
-          ))}
+          {options.map((option, index) =>
+            answerChosen &&
+            options[index].name.common === options[correctIndex].name.common ? (
+              <Alert severity="success">
+                {language === "french"
+                  ? option.translations.fra.common
+                  : language === "spanish"
+                  ? option.translations.spa.common
+                  : option.name.common}
+              </Alert>
+            ) : answerChosen &&
+              index === selectedIndex &&
+              options[index].name.common !==
+                options[correctIndex].name.common ? (
+              <Alert severity="error">
+                {language === "french"
+                  ? option.translations.fra.common
+                  : language === "spanish"
+                  ? option.translations.spa.common
+                  : option.name.common}
+              </Alert>
+            ) : (
+              <ListItemButton
+                key={option.name.common}
+                className="options-list__btn"
+                selected={selectedIndex === 2}
+                onClick={(event) => handleListItemClick(event, index)}
+              >
+                <ListItemText
+                  className="options-list__text"
+                  primary={
+                    language === "french"
+                      ? option.translations.fra.common
+                      : language === "spanish"
+                      ? option.translations.spa.common
+                      : option.name.common
+                  }
+                />
+              </ListItemButton>
+            )
+          )}
         </List>
       </Box>
       <div>
-        Round: {round}/{numOfRounds}
+        {language === "spanish"
+          ? "Ronda"
+          : language === "french"
+          ? "Tour"
+          : "Round"}
+        : {currentRound}/{numOfRounds}
       </div>
       <div>
-        Score: {numberCorrect}/{round - 1}
+        {language === "spanish" ? "Puntaje" : "Score"}: {numberCorrect}/
+        {currentRound - 1}
       </div>
     </>
   );
