@@ -10,7 +10,9 @@
   flex-direction: column;
   align-items: center;
 }
-.start-page {
+
+.start-page,
+.game {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -23,7 +25,9 @@
 }
 
 .flag {
-  width: 100%;
+  display: block;
+  margin: 0 auto;
+  width: min(100%, 450px);
   box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1),
     0 4px 6px -2px rgba(0, 0, 0, 0.05);
 }
@@ -48,18 +52,33 @@
   margin-top: 0.25rem;
 }
 
-.start-btn {
-  display: block;
-  width: 110px;
+.btn {
+  // display: block;
+  margin: 0 auto;
+  &--start {
+    width: 110px;
+  }
 }
 
 /* Main Screen */
 
-.flag,
 .options-box {
-  align-self: stretch;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0 auto;
 }
 
 .options-list {
-  width: 100%;
+  margin: 0 auto;
+  width: min(100%, 450px);
+}
+
+.round-and-score {
+  margin: 0 auto;
+}
+
+.capital {
+  font-size: 5rem;
 }

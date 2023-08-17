@@ -11,12 +11,18 @@ import { GameContext } from "../context/gameContext";
 
 export default function StartPage() {
   const {
+    handleStartGame,
     numOfRounds,
     setNumOfRounds,
-    handleStartGame,
+    gameType,
+    setGameType,
     language,
     setLanguage,
   } = useContext(GameContext);
+
+  const handleGameTypeChange = (e, newGameType) => {
+    setGameType(newGameType);
+  };
 
   const handleNumOfRoundsChange = (e, newNumOfRounds) => {
     setNumOfRounds(newNumOfRounds);
@@ -35,6 +41,36 @@ export default function StartPage() {
           ? "Juego de Banderas"
           : "Flag Game"}
       </h1>
+      <label className="game-type__label" htmlFor="gameType">
+        {language === "french"
+          ? "Type de jeu"
+          : language === "spanish"
+          ? "Tipo de juego"
+          : "Game Type"}
+      </label>
+      <ToggleButtonGroup
+        className="num-of-rounds__buttons"
+        color="primary"
+        value={gameType}
+        exclusive
+        onChange={handleGameTypeChange}
+        aria-label="Platform"
+        id="gameType"
+      >
+        <ToggleButton value="flags">
+          {" "}
+          {language === "french"
+            ? "Drapeaux"
+            : language === "spanish"
+            ? "Banderas"
+            : "Flags"}
+        </ToggleButton>
+        <ToggleButton value="capitals">
+          {" "}
+          {language === "english" ? "Capitals" : "Capitales"}
+        </ToggleButton>
+      </ToggleButtonGroup>
+
       <label className="num-of-rounds__label" htmlFor="numOfRounds">
         {language === "french"
           ? "Nombre de tours"
@@ -75,7 +111,7 @@ export default function StartPage() {
         </Select>
       </FormControl>
       <Button
-        className="start-btn"
+        className="btn btn--start"
         onClick={() => handleStartGame()}
         style={{ marginTop: "1rem" }}
         variant="contained"

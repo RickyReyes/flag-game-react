@@ -5,16 +5,33 @@ import "@fontsource/roboto/500.css";
 import "@fontsource/roboto/700.css";
 import Start from "./components/Start";
 import Game from "./components/Game";
+import End from "./components/End";
 import { GameContext } from "./context/gameContext";
 
 function App() {
-  const { gameStarted, options, setCorrectIndex } = useContext(GameContext);
+  const {
+    active,
+    setActive,
+    options,
+    setCorrectIndex,
+    currentRound,
+    numOfRounds,
+  } = useContext(GameContext);
 
   useEffect(() => {
     setCorrectIndex(Math.floor(Math.random() * 5));
   }, [options]);
 
-  return <main className="App">{!gameStarted ? <Start /> : <Game />}</main>;
+  useEffect(() => {
+    if (currentRound > numOfRounds) {
+      setActive(false);
+    }
+  }, [currentRound]);
+
+  console.log(!active, currentRound > numOfRounds);
+  if (!active && currentRound > numOfRounds) return <End />;
+  else if (!active) return <Start />;
+  else return <Game />;
 }
 
 export default App;

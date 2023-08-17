@@ -4,19 +4,23 @@ import { getOptions } from "../utils/utils";
 const GameContext = createContext();
 
 function GameContextProvider(props) {
-  const [numOfRounds, setNumOfRounds] = useState(5);
-  const [language, setLanguage] = useState("english");
-  const NUM_OF_OPTIONS = 5; // per round
   const { countries, loading, error } = useCountries();
-  const [gameStarted, setGameStarted] = useState(false);
-  const [options, setOptions] = useState([]); // per round
+  const [active, setActive] = useState(false);
+  const [gameOver, setGameOver] = useState(false);
+  const [gameType, setGameType] = useState("flags");
+  const [numOfRounds, setNumOfRounds] = useState(5);
+  const [currentRound, setCurrentRound] = useState(null);
+  const [language, setLanguage] = useState("english");
   const [correctIndex, setCorrectIndex] = useState(null);
-  const [currentRound, setCurrentRound] = useState(1);
   const [numberCorrect, setNumberCorrect] = useState(0);
+  // options will hold an array of NUM_OF_OPTIONS countries, changed every round
+  const NUM_OF_OPTIONS = 5;
+  const [options, setOptions] = useState([]);
 
   function handleStartGame() {
     if (countries) {
-      setGameStarted(true);
+      setCurrentRound(1);
+      setActive(true);
       setOptions(getOptions(countries, NUM_OF_OPTIONS));
     }
   }
@@ -32,8 +36,6 @@ function GameContextProvider(props) {
         error,
         numOfRounds,
         setNumOfRounds,
-        gameStarted,
-        setGameStarted,
         options,
         setOptions,
         handleStartGame,
@@ -45,6 +47,12 @@ function GameContextProvider(props) {
         setNumberCorrect,
         language,
         setLanguage,
+        active,
+        setActive,
+        gameOver,
+        setGameOver,
+        gameType,
+        setGameType,
       }}
     >
       {props.children}
